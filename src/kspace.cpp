@@ -92,7 +92,7 @@ KSpace::KSpace(LAMMPS *lmp) :
   splittol = 1.0e-6;
 
   maxeatom = maxvatom = 0;
-  centroidstressflag = CENTROID_NOTAVAIL;
+  centroidstressflag = CENTROID_SAME;
 
   execution_space = Host;
   datamask_read = ALL_MASK;
@@ -245,7 +245,7 @@ void KSpace::ev_setup(int eflag, int vflag, int alloc)
 
   vflag_either = vflag;
   vflag_global = vflag & (VIRIAL_PAIR | VIRIAL_FDOTR);
-  vflag_atom = vflag & VIRIAL_ATOM;
+  vflag_atom = vflag & (VIRIAL_ATOM | VIRIAL_CENTROID);
 
   if (eflag_atom || vflag_atom) evflag_atom = 1;
   else evflag_atom = 0;
